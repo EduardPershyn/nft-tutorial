@@ -61,7 +61,7 @@ contract PresaleNft is ERC721, ERC2981, Ownable  {
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "ipfs://Qm/";
+        return "ipfs://QmP5nKCvKJouJZ5dEoMVP7eeRK8oSCxc2NvQsYGGQ26djn/";
     }
 
     function viewBalance() external view returns (uint256) {
