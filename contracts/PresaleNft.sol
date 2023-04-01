@@ -30,7 +30,7 @@ contract PresaleNft is ERC721, Ownable  {
                 merkleProof,
                 merkleRoot,
                 keccak256(abi.encodePacked(msg.sender, tokenId))),
-            "Invalid merkle proof");
+            "PresaleNft: invalid merkle proof");
 
         _updateWhiteList(tokenId);
         _mintWithSupply(tokenId);
