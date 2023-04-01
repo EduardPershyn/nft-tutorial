@@ -2,14 +2,16 @@
 pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/utils/structs/BitMaps.sol";
 
-contract PresaleNft is ERC721, Ownable  {
+contract PresaleNft is ERC721, ERC2981, Ownable  {
 
     uint256 public constant MAX_SUPPLY = 10;
     uint256 public constant PRICE = 0.0001 ether;
+    uint96 public constant ROYALTY = 250;
     bytes32 public merkleRoot;
 
     address private _nextOwner;
@@ -17,7 +19,11 @@ contract PresaleNft is ERC721, Ownable  {
     BitMaps.BitMap private wlBitMap;
 
     constructor(string memory name_, string memory symbol_) ERC721(name_, symbol_) {
+        _setDefaultRoyalty(msg.sender, ROYALTY);
+    }
 
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, ERC2981) returns (bool) {
+        return ERC721.supportsInterface(interfaceId) || ERC2981.supportsInterface(interfaceId);
     }
 
     function setMerkleRoot(bytes32 _merkleRoot) external onlyOwner {
