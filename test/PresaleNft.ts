@@ -6,9 +6,9 @@ const { keccak256 } = ethers.utils
 use(require('chai-as-promised'))
 
 describe('WhitelistSale', function () {
-    function hashNode(account, amount) {
-        console.log(account, amount);
-        return ethers.utils.solidityKeccak256(["address", "uint256"], [account, amount]);
+    function hashNode(account, tokenId) {
+        //console.log(account, tokenId);
+        return ethers.utils.solidityKeccak256(["address", "uint256"], [account, tokenId]);
     };
 
     it('allow only whitelisted accounts to mint', async () => {
