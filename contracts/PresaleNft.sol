@@ -26,8 +26,8 @@ contract PresaleNft is ERC721, ERC2981, Ownable  {
         return ERC721.supportsInterface(interfaceId) || ERC2981.supportsInterface(interfaceId);
     }
 
-    function setMerkleRoot(bytes32 _merkleRoot) external onlyOwner {
-        merkleRoot = _merkleRoot;
+    function setMerkleRoot(bytes32 merkleRoot_) external onlyOwner {
+        merkleRoot = merkleRoot_;
     }
 
     function presale(bytes32[] calldata merkleProof, uint256 tokenId) external {
@@ -79,7 +79,7 @@ contract PresaleNft is ERC721, ERC2981, Ownable  {
     function acceptOwnership() external {
         require(msg.sender == _nextOwner, "PresaleNft: the sender is not next owner");
 
-        _transferOwnership(_nextOwner);
+        _transferOwnership(msg.sender);
         _nextOwner = address(0);
     }
 }

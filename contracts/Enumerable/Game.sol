@@ -6,7 +6,7 @@ import "hardhat/console.sol";
 
 contract Game {
 
-    ERC721Enumerable public itemNft;
+    ERC721Enumerable immutable public itemNft;
 
     constructor(ERC721Enumerable itemNft_) {
         itemNft = itemNft_;
